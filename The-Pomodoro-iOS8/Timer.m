@@ -22,14 +22,23 @@
     });
     return sharedInstance;
 }
+
 - (void)startTimer {
     self.isOn = YES;
     [self checkActive];
 }
+
 - (void)endTimer {
     self.isOn = NO;
-    []
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"TimerCompleteNotification" object:self];
 }
+
+- (void)cancelTimer {
+    self.isOn = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
 - (void)decreaseSecond {
     self.timeRemainingInSeconds --;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -39,9 +48,18 @@
         [self endTimer];
     }
 }
+
 - (void)timerCompleteNotification {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"TimerCompleteNotification" object:self];
+}
+
+- (void)checkActive {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    if (self.isOn) {
+        [self decreaseSecond];
+        [self performSelector:@selector(checkActive) withObject:nil afterDelay:1];
+    }
 }
 
 

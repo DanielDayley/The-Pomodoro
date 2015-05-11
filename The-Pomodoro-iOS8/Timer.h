@@ -16,8 +16,9 @@ static NSString *newRoundNotification;
 @interface Timer : NSObject
 @property (nonatomic, readonly) NSInteger minutesRemaining;
 @property (nonatomic, assign) NSInteger secondsRemaining;
-@property (nonatomic,assign) NSInteger timeRemainingInSeconds;
+@property (nonatomic, readonly) NSInteger timeRemainingInSeconds;
 
 - (void)startTimer;
+- (void)cancelTimer;
 
 @end
