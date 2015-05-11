@@ -16,6 +16,7 @@
 		64CEFC001B0151CB009F4E48 /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64CEFBFE1B0151CB009F4E48 /* TimerViewController.xib */; };
 		64CEFC021B015608009F4E48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64CEFC011B015608009F4E48 /* Images.xcassets */; };
 		64CEFC051B0158C7009F4E48 /* RoundsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CEFC041B0158C7009F4E48 /* RoundsController.m */; };
+		64CEFC081B015C6B009F4E48 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CEFC071B015C6B009F4E48 /* Timer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		64CEFC011B015608009F4E48 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		64CEFC031B0158C7009F4E48 /* RoundsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundsController.h; sourceTree = "<group>"; };
 		64CEFC041B0158C7009F4E48 /* RoundsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundsController.m; sourceTree = "<group>"; };
+		64CEFC061B015C6B009F4E48 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		64CEFC071B015C6B009F4E48 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				64CEFC031B0158C7009F4E48 /* RoundsController.h */,
 				64CEFC041B0158C7009F4E48 /* RoundsController.m */,
 				64CEFBFC1B0151CB009F4E48 /* TimerViewController.h */,
+				64CEFC061B015C6B009F4E48 /* Timer.h */,
+				64CEFC071B015C6B009F4E48 /* Timer.m */,
 				64CEFBFD1B0151CB009F4E48 /* TimerViewController.m */,
 				64CEFBFE1B0151CB009F4E48 /* TimerViewController.xib */,
 				34FB5C201A95A83100E3E2F8 /* LaunchScreen.xib */,
@@ -232,6 +237,7 @@
 				64CEFBFF1B0151CB009F4E48 /* TimerViewController.m in Sources */,
 				34FB5C171A95A83100E3E2F8 /* AppDelegate.m in Sources */,
 				34FB5C141A95A83100E3E2F8 /* main.m in Sources */,
+				64CEFC081B015C6B009F4E48 /* Timer.m in Sources */,
 				64CEFC051B0158C7009F4E48 /* RoundsController.m in Sources */,
 				64CEFBFB1B0151B9009F4E48 /* RoundsViewController.m in Sources */,
 			);
