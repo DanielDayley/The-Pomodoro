@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface RoundsController : NSObject
-
+@property (nonatomic,readonly) NSArray *roundTimes;
+@property (nonatomic)NSInteger currentRound;
 @end
