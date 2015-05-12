@@ -9,6 +9,7 @@
 #import "RoundsViewController.h"
 #import "RoundsController.h"
 #import "Timer.h"
+#import "TimerViewController.h"
 
 @interface RoundsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UITableView *tableView;
@@ -24,6 +25,17 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"theID"];
     [self.view addSubview:self.tableView];
 
+}
+- (void)roundComplete {
+    if ([RoundsController sharedInstance].currentRound < [RoundsController sharedInstance].roundTimes.count -1) {
+        [RoundsController sharedInstance].currentRound ++;
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:[RoundsController sharedInstance].currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [[RoundsController sharedInstance] roundSelected];
+    } else {
+        [RoundsController sharedInstance].currentRound = 0;
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:[RoundsController sharedInstance].currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [[RoundsController sharedInstance] roundSelected];
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -41,6 +53,8 @@
     [RoundsController sharedInstance].currentRound = indexPath.row;
     [[RoundsController sharedInstance] roundSelected];
     [[Timer sharedInstance] cancelTimer];
+    [[Timer sharedInstance] updateMinutesAndSeconds];
+    self.tabBarController.selectedViewController = self.tabBarController.viewControllers[0];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

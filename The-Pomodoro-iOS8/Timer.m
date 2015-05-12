@@ -34,7 +34,7 @@
 
 - (void)startTimer {
     self.isOn = YES;
-    [self checkActive];
+    [self performSelector:@selector(checkActive) withObject:nil afterDelay:1];
 }
 
 - (void)endTimer {
@@ -50,8 +50,8 @@
 
 - (void)decreaseSecond {
     self.timeRemainingInSeconds --;
-    NSLog(@"%ld : %ld",(long)[Timer sharedInstance].minutesRemaining,(long)[Timer sharedInstance].secondsRemaining);
     [self updateMinutesAndSeconds];
+    NSLog(@"%ld : %ld",(long)[Timer sharedInstance].minutesRemaining,(long)[Timer sharedInstance].secondsRemaining);
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:secondTickNotification object:nil];
     if (self.timeRemainingInSeconds == 0)
@@ -59,25 +59,6 @@
         [self endTimer];
     }
 }
-//- (void)decreaseSecond
-//{
-//    if (self.secondsRemaining > 0)
-//    {
-//        self.secondsRemaining--;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:secondTickNotification object:nil];
-//    }
-//    else if (self.secondsRemaining == 0 && self.minutesRemaining > 0)
-//    {
-//        self.minutesRemaining--;
-//        self.secondsRemaining = 59;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:secondTickNotification object:nil];
-//    }
-//    else
-//    {
-//        [self endTimer];
-//    }
-//}
-
 - (void)timerCompleteNotification {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"timerCompleteNotification" object:self];

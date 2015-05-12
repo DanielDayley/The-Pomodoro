@@ -30,20 +30,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewDidAppear:(BOOL)animated {
+    [self timerLabelUpdate];
+}
 
 - (IBAction)trigger:(id)sender {
     if (self.timerButton.enabled)
         self.timerButton.enabled = NO;
-   // if ([self.timerButton.titleLabel  isEqual: @"Start"]) {
         [[Timer sharedInstance] startTimer];
     self.timerLabel.text = [self timerStringWithMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
 
-     //   self.timerButton.titleLabel.text = @"Stop";
-        
-  //  }
-  //  if ([self.timerButton.titleLabel isEqual:@"Stop"]) {
-        
-  //  }
 }
 
 
@@ -57,11 +53,20 @@
                selector:@selector(timerLabelUpdate)
                name:secondTickNotification
                object:nil];
+        [nc addObserver:self
+               selector:@selector(newRound)
+               name:newRoundNotification
+                 object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)newRound
+{
+    [self timerLabelUpdate];
+    self.timerButton.enabled = YES;
 }
 
 -(void)dealloc {
