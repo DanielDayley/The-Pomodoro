@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "TimerViewController.h"
 #import "RoundsViewController.h"
+#import "AppearanceController.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    
+    AppearanceController *appearanceInitilizer = [AppearanceController new];
+    appearanceInitilizer.themeColor = [UIColor redColor];
+    
+    [appearanceInitilizer initializeAppearanceDefaults];
+    
     
     TimerViewController *timerVC = [TimerViewController new];
     timerVC.tabBarItem.title =  @"Timer";

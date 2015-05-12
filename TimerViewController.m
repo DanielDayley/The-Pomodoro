@@ -8,6 +8,7 @@
 
 #import "TimerViewController.h"
 #import "Timer.h"
+#import "AppearanceController.h"
 
 @interface TimerViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *timerButton;
@@ -28,10 +29,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated {
     [self timerLabelUpdate];
+    AppearanceController *appearanceColor = [AppearanceController new];
+    [appearanceColor initializeAppearanceDefaults];
+    
+    self.view.backgroundColor = appearanceColor.themeColor;
+    self.timerLabel.textColor = [UIColor whiteColor];
 }
 
 - (IBAction)trigger:(id)sender {

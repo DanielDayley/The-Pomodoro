@@ -24,6 +24,10 @@
     return @[@25,@5,@25,@5,@25,@5,@25,@15];
 }
 
+-(NSArray *)imageNames {
+    return @[@"jason", @"run",@"yoga",@"tv",@"bottle",@"football",@"beer",@"trek"];
+}
+
 - (void)roundSelected {
     [Timer sharedInstance].timeRemainingInSeconds = [[self roundTimes][self.currentRound] integerValue]*60;
     [[NSNotificationCenter defaultCenter] postNotificationName:newRoundNotification object:nil];

@@ -24,6 +24,7 @@
     self.tableView.dataSource = self;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"theID"];
     [self.view addSubview:self.tableView];
+     self.tabBarController.tabBar.translucent = NO;
 
 }
 - (void)roundComplete {
@@ -47,12 +48,21 @@
     NSArray *roundsArray = [RoundsController sharedInstance].roundTimes;
     NSNumber *minutes = roundsArray[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%li minutes", (long)[minutes integerValue]];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
+////    UIImage *image = [UIImage imageNamed:roundsArray[0]];
+//    NSLog(@"This the image: %@",image);
+    
+    cell.imageView.image = [UIImage imageNamed:[[RoundsController sharedInstance] imageNames][indexPath.row]];
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [RoundsController sharedInstance].currentRound = indexPath.row;
     [[RoundsController sharedInstance] roundSelected];
     [[Timer sharedInstance] cancelTimer];
+    //display selecting time on roundsViewController. 
     [[Timer sharedInstance] updateMinutesAndSeconds];
     self.tabBarController.selectedViewController = self.tabBarController.viewControllers[0];
 }
@@ -60,6 +70,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+
+
 
 /*
 #pragma mark - Navigation

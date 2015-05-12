@@ -33,8 +33,11 @@
 }
 
 - (void)startTimer {
+    //to prevent timer starting when timr is zero. 
+    if (self.timeRemainingInSeconds >0){
     self.isOn = YES;
     [self performSelector:@selector(checkActive) withObject:nil afterDelay:1];
+    }
 }
 
 - (void)endTimer {

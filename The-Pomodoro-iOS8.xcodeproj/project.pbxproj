@@ -17,6 +17,7 @@
 		64CEFC021B015608009F4E48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64CEFC011B015608009F4E48 /* Images.xcassets */; };
 		64CEFC051B0158C7009F4E48 /* RoundsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CEFC041B0158C7009F4E48 /* RoundsController.m */; };
 		64CEFC081B015C6B009F4E48 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CEFC071B015C6B009F4E48 /* Timer.m */; };
+		76923EB21B0293FC0031D702 /* AppearanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76923EB11B0293FC0031D702 /* AppearanceController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		64CEFC041B0158C7009F4E48 /* RoundsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundsController.m; sourceTree = "<group>"; };
 		64CEFC061B015C6B009F4E48 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		64CEFC071B015C6B009F4E48 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		76923EB01B0293FB0031D702 /* AppearanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceController.h; sourceTree = "<group>"; };
+		76923EB11B0293FC0031D702 /* AppearanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				34FB5C161A95A83100E3E2F8 /* AppDelegate.m */,
 				64CEFBF91B0151B9009F4E48 /* RoundsViewController.h */,
 				64CEFBFA1B0151B9009F4E48 /* RoundsViewController.m */,
+				76923EB01B0293FB0031D702 /* AppearanceController.h */,
+				76923EB11B0293FC0031D702 /* AppearanceController.m */,
 				64CEFC031B0158C7009F4E48 /* RoundsController.h */,
 				64CEFC041B0158C7009F4E48 /* RoundsController.m */,
 				64CEFC061B015C6B009F4E48 /* Timer.h */,
@@ -234,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76923EB21B0293FC0031D702 /* AppearanceController.m in Sources */,
 				64CEFBFF1B0151CB009F4E48 /* TimerViewController.m in Sources */,
 				34FB5C171A95A83100E3E2F8 /* AppDelegate.m in Sources */,
 				34FB5C141A95A83100E3E2F8 /* main.m in Sources */,

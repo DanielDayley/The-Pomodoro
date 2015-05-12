@@ -16,5 +16,5 @@
 - (NSArray *)roundTimes;
 
 - (void)roundSelected;
-
+-(NSArray *)imageNames;
 @end
