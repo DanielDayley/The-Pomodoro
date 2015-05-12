@@ -12,15 +12,25 @@
 @property (nonatomic, assign) BOOL isOn;
 @property (nonatomic) NSInteger timeRemainingInSeconds;
 
+
 @end
 @implementation Timer
+
 + (Timer *)sharedInstance {
     static Timer *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[Timer alloc] init];
+        // sharedInstance.timeRemainingInSeconds = 3599;
+        sharedInstance.minutesRemaining = sharedInstance.timeRemainingInSeconds/60;
+        sharedInstance.secondsRemaining = sharedInstance.timeRemainingInSeconds - (60 * (sharedInstance.timeRemainingInSeconds/60));
     });
     return sharedInstance;
+}
+
+- (void)updateMinutesAndSeconds {
+    [Timer sharedInstance].minutesRemaining = [Timer sharedInstance].timeRemainingInSeconds/60;
+    [Timer sharedInstance].secondsRemaining = [Timer sharedInstance].timeRemainingInSeconds - (60 * ([Timer sharedInstance].timeRemainingInSeconds/60));
 }
 
 - (void)startTimer {
@@ -31,7 +41,7 @@
 - (void)endTimer {
     self.isOn = NO;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc postNotificationName:@"TimerCompleteNotification" object:self];
+    [nc postNotificationName:@"timerCompleteNotification" object:nil];
 }
 
 - (void)cancelTimer {
@@ -41,17 +51,37 @@
 
 - (void)decreaseSecond {
     self.timeRemainingInSeconds --;
+    NSLog(@"%ld : %ld",(long)[Timer sharedInstance].minutesRemaining,(long)[Timer sharedInstance].secondsRemaining);
+    [self updateMinutesAndSeconds];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc postNotificationName:@"SecondTickNotification" object:self];
+    [nc postNotificationName:secondTickNotification object:nil];
     if (self.timeRemainingInSeconds == 0)
     {
         [self endTimer];
     }
 }
+//- (void)decreaseSecond
+//{
+//    if (self.secondsRemaining > 0)
+//    {
+//        self.secondsRemaining--;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:secondTickNotification object:nil];
+//    }
+//    else if (self.secondsRemaining == 0 && self.minutesRemaining > 0)
+//    {
+//        self.minutesRemaining--;
+//        self.secondsRemaining = 59;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:secondTickNotification object:nil];
+//    }
+//    else
+//    {
+//        [self endTimer];
+//    }
+//}
 
 - (void)timerCompleteNotification {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc postNotificationName:@"TimerCompleteNotification" object:self];
+    [nc postNotificationName:@"timerCompleteNotification" object:self];
 }
 
 - (void)checkActive {

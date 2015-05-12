@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *secondTickNotification;
-static NSString *timerCompleteNotification;
-static NSString *newRoundNotification;
+static NSString *secondTickNotification = @"secondTickNotification";
+static NSString *timerCompleteNotification = @"timerCompleteNotification";
+static NSString *newRoundNotification = @"newRoundNotification";
 
 
 @interface Timer : NSObject
-@property (nonatomic, readonly) NSInteger minutesRemaining;
-@property (nonatomic, assign) NSInteger secondsRemaining;
+@property (nonatomic) NSInteger minutesRemaining;
+@property (nonatomic) NSInteger secondsRemaining;
 @property (nonatomic, readonly) NSInteger timeRemainingInSeconds;
 
++ (Timer *)sharedInstance;
 - (void)startTimer;
 - (void)cancelTimer;
 

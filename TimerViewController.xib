@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimerViewController">
             <connections>
-                <outlet property="timerButton" destination="Q1L-N9-1va" id="uNx-HV-i9g"/>
+                <outlet property="timerButton" destination="Q1L-N9-1va" id="MOj-BT-lTi"/>
                 <outlet property="timerLabel" destination="DZu-IS-eds" id="ezk-8e-bSA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,7 +28,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="trigger:" destination="-1" eventType="touchUpInside" id="nyZ-Wp-Mgq"/>
+                        <action selector="trigger:" destination="-1" eventType="touchUpInside" id="Q05-hG-g4R"/>
                     </connections>
                 </button>
             </subviews>
