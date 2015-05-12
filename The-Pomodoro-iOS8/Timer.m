@@ -10,7 +10,6 @@
 
 @interface Timer()
 @property (nonatomic, assign) BOOL isOn;
-@property (nonatomic) NSInteger timeRemainingInSeconds;
 
 
 @end
