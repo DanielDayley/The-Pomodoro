@@ -25,7 +25,7 @@
 }
 
 - (void)roundSelected {
-    [Timer sharedInstance].timeRemainingInSeconds = [[self roundTimes][self.currentRound] integerValue];
+    [Timer sharedInstance].timeRemainingInSeconds = [[self roundTimes][self.currentRound] integerValue]*60;
     [[NSNotificationCenter defaultCenter] postNotificationName:newRoundNotification object:nil];
 }
 

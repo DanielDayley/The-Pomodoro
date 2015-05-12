@@ -57,11 +57,20 @@
                selector:@selector(timerLabelUpdate)
                name:secondTickNotification
                object:nil];
+        [nc addObserver:self
+               selector:@selector(newRound)
+               name:newRoundNotification
+                 object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)newRound
+{
+    [self timerLabelUpdate];
+    self.timerButton.enabled = YES;
 }
 
 -(void)dealloc {

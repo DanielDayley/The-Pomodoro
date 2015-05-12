@@ -25,6 +25,17 @@
     [self.view addSubview:self.tableView];
 
 }
+- (void)roundComplete {
+    if ([RoundsController sharedInstance].currentRound < [RoundsController sharedInstance].roundTimes.count -1) {
+        [RoundsController sharedInstance].currentRound ++;
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:[RoundsController sharedInstance].currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [[RoundsController sharedInstance] roundSelected];
+    } else {
+        [RoundsController sharedInstance].currentRound = 0;
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:[RoundsController sharedInstance].currentRound inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [[RoundsController sharedInstance] roundSelected];
+    }
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [RoundsController sharedInstance].roundTimes.count ;
