@@ -24,8 +24,6 @@
     self.tableView.dataSource = self;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"theID"];
     [self.view addSubview:self.tableView];
-     self.tabBarController.tabBar.translucent = NO;
-
 }
 - (void)roundComplete {
     if ([RoundsController sharedInstance].currentRound < [RoundsController sharedInstance].roundTimes.count -1) {

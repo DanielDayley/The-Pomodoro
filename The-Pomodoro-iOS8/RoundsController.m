@@ -21,7 +21,7 @@
 }
 
 - (NSArray *)roundTimes {
-    return @[@25,@5,@25,@5,@25,@5,@25,@15];
+    return @[@1,@5,@10,@15,@25,@30,@45,@60];
 }
 
 -(NSArray *)imageNames {

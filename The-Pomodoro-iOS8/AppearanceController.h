@@ -15,7 +15,7 @@
 
 @property (nonatomic) UIColor *themeColor;
 
-
++ (AppearanceController*)sharedInstance;
 -(void)initializeAppearanceDefaults;
 
 

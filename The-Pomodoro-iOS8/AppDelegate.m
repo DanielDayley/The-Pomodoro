@@ -10,6 +10,7 @@
 #import "TimerViewController.h"
 #import "RoundsViewController.h"
 #import "AppearanceController.h"
+#import "Timer.h"
 
 @interface AppDelegate ()
 
@@ -20,19 +21,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    
-    
-    AppearanceController *appearanceInitilizer = [AppearanceController new];
-    appearanceInitilizer.themeColor = [UIColor redColor];
-    
-    [appearanceInitilizer initializeAppearanceDefaults];
+//    [AppearanceController sharedInstance].themeColor = [UIColor redColor];
+    [[AppearanceController sharedInstance] initializeAppearanceDefaults];
     
     
     TimerViewController *timerVC = [TimerViewController new];
     timerVC.tabBarItem.title =  @"Timer";
     timerVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Timer" image:[UIImage imageNamed:@"timer"] tag:0];
-
+    
     RoundsViewController *roundsVC = [RoundsViewController new];
     UINavigationController *roundsNavVC = [[UINavigationController alloc] initWithRootViewController:roundsVC];
     roundsNavVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Rounds" image:[UIImage imageNamed:@"rounds"] tag:1];
@@ -53,20 +49,37 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[Timer sharedInstance] prepareForBackground];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[Timer sharedInstance] loadFromBackGround];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil]];
+        [application registerForRemoteNotifications];
+    } else {
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+         (UIRemoteNotificationTypeBadge |
+          UIRemoteNotificationTypeSound |
+          UIRemoteNotificationTypeAlert)];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    UIAlertController *notificationAlert = [UIAlertController alertControllerWithTitle:@"Timer Complete" message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+    [notificationAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+    [notificationAlert addAction:[UIAlertAction actionWithTitle:@"Next Round" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[Timer sharedInstance] startTimer];
+    }]];
+    [self.window.rootViewController presentViewController:notificationAlert animated:YES completion:nil];
+    application.applicationIconBadgeNumber = 0;
+}
 @end

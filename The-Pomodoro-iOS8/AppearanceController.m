@@ -13,6 +13,15 @@
 
 @implementation AppearanceController
 
++ (AppearanceController*)sharedInstance {
+    
+    static AppearanceController *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[AppearanceController alloc] init];
+    });
+    return sharedInstance;
+}
 
 -(void)initializeAppearanceDefaults
 
@@ -24,13 +33,13 @@
         [UISwitch appearance].onTintColor = self.themeColor;
         [UISegmentedControl appearance].tintColor = self.themeColor;
         [UIStepper appearance].tintColor = self.themeColor;
-        [[UIButton appearance]setTitleColor:self.themeColor forState:UIControlStateNormal];
+        [[UIButton appearance]setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[UIButton appearance]setTitleColor:self.themeColor forState:UIControlStateDisabled];
         [UITabBar appearance].barTintColor = self.themeColor;
         [UITabBar appearance].selectedImageTintColor = [UIColor whiteColor];
+        [[UITabBar appearance] setShadowImage:[UIImage imageNamed:@"white"]];
         [UITableView appearance].sectionIndexBackgroundColor = self.themeColor;
-        
     }
-    
 }
 
 

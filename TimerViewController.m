@@ -34,10 +34,9 @@
 }
 -(void)viewDidAppear:(BOOL)animated {
     [self timerLabelUpdate];
-    AppearanceController *appearanceColor = [AppearanceController new];
-    [appearanceColor initializeAppearanceDefaults];
-    
-    self.view.backgroundColor = appearanceColor.themeColor;
+    [[AppearanceController sharedInstance] initializeAppearanceDefaults];
+    self.tabBarController.tabBar.translucent = NO;
+    self.view.backgroundColor = [AppearanceController sharedInstance].themeColor;
     self.timerLabel.textColor = [UIColor whiteColor];
 }
 
@@ -45,14 +44,14 @@
     if (self.timerButton.enabled)
         self.timerButton.enabled = NO;
         [[Timer sharedInstance] startTimer];
-    self.timerLabel.text = [self timerStringWithMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
+    self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
 
 }
 
 
 - (void)timerLabelUpdate {
     NSLog(@"Timer Label updated.");
-    self.timerLabel.text = [self timerStringWithMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
+    self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
 }
 - (void)registerForNotifications {
     NSNotificationCenter *nc= [NSNotificationCenter defaultCenter];
@@ -83,19 +82,26 @@
 - (void)unregisterForNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self];
-    
 }
 
-- (NSString *)timerStringWithMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds {
-    NSString *timerString;
+- (NSString *)timerStringWithHours:(NSInteger)hours andMinutes:(NSInteger)minutes andSeconds:(NSInteger)seconds {
+    NSString *secondString;
+    NSString *minuteString;
+    NSString *hourString = @"";
+    if (hours < 10) {
+        hourString = [hourString stringByAppendingString:[NSString stringWithFormat:@"0%li:", (long)hours]]; }
+    else {minuteString = [hourString stringByAppendingString:[NSString stringWithFormat:@"%li:", (long)minutes]]; }
+    if (hours == 0) {
+        hourString = @"";
+    }
     if (minutes < 10) {
-        timerString = [NSString stringWithFormat:@"0%li:", (long)minutes]; }
-    else {timerString = [NSString stringWithFormat:@"%li:", (long)minutes]; }
+        minuteString = [hourString stringByAppendingString:[NSString stringWithFormat:@"0%li:", (long)minutes]]; }
+    else {minuteString = [hourString stringByAppendingString:[NSString stringWithFormat:@"%li:", (long)minutes]]; }
     
     if (seconds < 10) {
-        timerString = [timerString stringByAppendingString:[NSString stringWithFormat:@"0%li", (long)seconds]]; }
-    else { timerString = [timerString stringByAppendingString:[NSString stringWithFormat:@"%li", (long)seconds]]; }
-    return timerString;
+        secondString = [minuteString stringByAppendingString:[NSString stringWithFormat:@"0%li", (long)seconds]]; }
+    else { secondString = [minuteString stringByAppendingString:[NSString stringWithFormat:@"%li", (long)seconds]]; }
+    return secondString;
 }
 
 /*

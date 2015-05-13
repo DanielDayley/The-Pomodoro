@@ -10,7 +10,7 @@
 
 @interface Timer()
 @property (nonatomic, assign) BOOL isOn;
-
+@property (nonatomic)NSDate *expirationDate;
 
 @end
 @implementation Timer
@@ -21,21 +21,42 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[Timer alloc] init];
         // sharedInstance.timeRemainingInSeconds = 3599;
+        sharedInstance.hoursRemaining = sharedInstance.timeRemainingInSeconds/60/60;
         sharedInstance.minutesRemaining = sharedInstance.timeRemainingInSeconds/60;
         sharedInstance.secondsRemaining = sharedInstance.timeRemainingInSeconds - (60 * (sharedInstance.timeRemainingInSeconds/60));
     });
     return sharedInstance;
 }
 
+- (void)prepareForBackground {
+    [[NSUserDefaults standardUserDefaults] setObject:self.expirationDate forKey:@"expirationDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)loadFromBackGround {
+    self.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"expirationDate"];
+    [Timer sharedInstance].timeRemainingInSeconds = self.expirationDate.timeIntervalSince1970 - [NSDate date].timeIntervalSince1970;
+    [[Timer sharedInstance] startTimer];
+}
+
 - (void)updateMinutesAndSeconds {
-    [Timer sharedInstance].minutesRemaining = [Timer sharedInstance].timeRemainingInSeconds/60;
+    [Timer sharedInstance].hoursRemaining = [Timer sharedInstance].timeRemainingInSeconds/60/60;
+    [Timer sharedInstance].minutesRemaining = [Timer sharedInstance].timeRemainingInSeconds/60 - [Timer sharedInstance].hoursRemaining * 60;
     [Timer sharedInstance].secondsRemaining = [Timer sharedInstance].timeRemainingInSeconds - (60 * ([Timer sharedInstance].timeRemainingInSeconds/60));
 }
 
 - (void)startTimer {
-    //to prevent timer starting when timr is zero. 
+    //to prevent timer starting when timer is zero.
     if (self.timeRemainingInSeconds >0){
-    self.isOn = YES;
+        self.expirationDate = [NSDate dateWithTimeIntervalSinceNow:self.timeRemainingInSeconds];
+        NSLog(@"Starting timer: will end  in %ld seconds.",(long)self.timeRemainingInSeconds);
+        self.isOn = YES;
+        UILocalNotification *localNotification = [UILocalNotification new];
+        localNotification.fireDate = self.expirationDate;
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.alertBody = @"Start another round?";
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     [self performSelector:@selector(checkActive) withObject:nil afterDelay:1];
     }
 }
@@ -48,6 +69,7 @@
 
 - (void)cancelTimer {
     self.isOn = NO;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 

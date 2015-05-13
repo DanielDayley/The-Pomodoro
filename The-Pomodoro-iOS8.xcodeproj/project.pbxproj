@@ -95,10 +95,10 @@
 			children = (
 				34FB5C151A95A83100E3E2F8 /* AppDelegate.h */,
 				34FB5C161A95A83100E3E2F8 /* AppDelegate.m */,
-				64CEFBF91B0151B9009F4E48 /* RoundsViewController.h */,
-				64CEFBFA1B0151B9009F4E48 /* RoundsViewController.m */,
 				76923EB01B0293FB0031D702 /* AppearanceController.h */,
 				76923EB11B0293FC0031D702 /* AppearanceController.m */,
+				64CEFBF91B0151B9009F4E48 /* RoundsViewController.h */,
+				64CEFBFA1B0151B9009F4E48 /* RoundsViewController.m */,
 				64CEFC031B0158C7009F4E48 /* RoundsController.h */,
 				64CEFC041B0158C7009F4E48 /* RoundsController.m */,
 				64CEFC061B015C6B009F4E48 /* Timer.h */,
