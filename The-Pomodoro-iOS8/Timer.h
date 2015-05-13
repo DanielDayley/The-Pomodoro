@@ -20,11 +20,13 @@ static NSString *newRoundNotification = @"newRoundNotification";
 @property (nonatomic) NSInteger minutesRemaining;
 @property (nonatomic) NSInteger secondsRemaining;
 @property (nonatomic, assign) NSInteger timeRemainingInSeconds;
+@property (nonatomic, assign) NSInteger previousRoundTime;
 
 + (Timer *)sharedInstance;
 - (void)updateMinutesAndSeconds;
 - (void)startTimer;
 - (void)cancelTimer;
+- (void)pauseTimer;
 - (void)prepareForBackground;
 - (void)loadFromBackGround;
 @end

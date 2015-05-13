@@ -26,10 +26,12 @@
 -(void)initializeAppearanceDefaults
 
 {
-    self.themeColor = [UIColor redColor];
+    self.themeColor = [UIColor blueColor];
     
     if (self.themeColor){
         [[UINavigationBar appearance]setBackgroundColor:self.themeColor];
+        [[UINavigationBar appearance]setTranslucent:NO];
+        [[UINavigationBar appearance]setTintColor:self.themeColor];
         [UISwitch appearance].onTintColor = self.themeColor;
         [UISegmentedControl appearance].tintColor = self.themeColor;
         [UIStepper appearance].tintColor = self.themeColor;
@@ -39,6 +41,7 @@
         [UITabBar appearance].selectedImageTintColor = [UIColor whiteColor];
         [[UITabBar appearance] setShadowImage:[UIImage imageNamed:@"white"]];
         [UITableView appearance].sectionIndexBackgroundColor = self.themeColor;
+        [UITableView appearance].backgroundColor = self.themeColor;
     }
 }
 

@@ -61,6 +61,10 @@
     }
 }
 
+- (void)pauseTimer {
+    self.isOn = NO;
+}
+
 - (void)endTimer {
     self.isOn = NO;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

@@ -39,18 +39,28 @@
     self.view.backgroundColor = [AppearanceController sharedInstance].themeColor;
     self.timerLabel.textColor = [UIColor whiteColor];
 }
+- (IBAction)resetButton:(id)sender {
+    [Timer sharedInstance].timeRemainingInSeconds = [Timer sharedInstance].previousRoundTime;
+    [self timerLabelUpdate];
+}
 
 - (IBAction)trigger:(id)sender {
-    if (self.timerButton.enabled)
-        self.timerButton.enabled = NO;
+    if ([self.timerButton.titleLabel.text isEqual:@"Start"] && ([Timer sharedInstance].timeRemainingInSeconds > 0)) {
         [[Timer sharedInstance] startTimer];
-    self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
-
+        self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
+        [self.timerButton setTitle:@"Stop" forState:UIControlStateNormal];
+    }
+        if ([self.timerButton.titleLabel.text isEqual:@"Stop"] && ([Timer sharedInstance].timeRemainingInSeconds > 0)) {
+            [[Timer sharedInstance] pauseTimer];
+            self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
+            [self.timerButton setTitle:@"Start" forState:UIControlStateNormal];
+    }
 }
 
 
 - (void)timerLabelUpdate {
     NSLog(@"Timer Label updated.");
+    [[Timer sharedInstance] updateMinutesAndSeconds];
     self.timerLabel.text = [self timerStringWithHours:[Timer sharedInstance].hoursRemaining andMinutes:[Timer sharedInstance].minutesRemaining andSeconds:[Timer sharedInstance].secondsRemaining];
 }
 - (void)registerForNotifications {
