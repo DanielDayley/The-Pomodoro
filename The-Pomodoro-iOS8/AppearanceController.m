@@ -26,7 +26,7 @@
 -(void)initializeAppearanceDefaults
 
 {
-    self.themeColor = [UIColor blueColor];
+    self.themeColor = [UIColor colorWithRed:0.153f green:0.165f blue:0.204f alpha:1.00f];
     
     if (self.themeColor){
         [[UINavigationBar appearance]setBackgroundColor:self.themeColor];

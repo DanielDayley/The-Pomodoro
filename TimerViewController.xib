@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimerViewController">
             <connections>
+                <outlet property="resetButton" destination="4ka-z7-eme" id="Yx7-5H-y7A"/>
                 <outlet property="timerButton" destination="Q1L-N9-1va" id="MOj-BT-lTi"/>
                 <outlet property="timerLabel" destination="DZu-IS-eds" id="ezk-8e-bSA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,36 +23,56 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-N9-1va">
+                    <rect key="frame" x="206" y="282" width="189" height="36"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <state key="normal" title="Start">
+                        <color key="titleShadowColor" red="0.99378106150000001" green="0.98765422680000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="trigger:" destination="-1" eventType="touchUpInside" id="Q05-hG-g4R"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-z7-eme">
-                    <rect key="frame" x="255" y="380" width="91" height="53"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                    <rect key="frame" x="206" y="378" width="189" height="36"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <state key="normal" title="Reset">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="resetButton:" destination="-1" eventType="touchUpInside" id="wSD-GE-s9Y"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-N9-1va">
-                    <rect key="frame" x="262" y="274" width="76" height="53"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
-                    <state key="normal" title="Start">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="trigger:" destination="-1" eventType="touchUpInside" id="Q05-hG-g4R"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="4ka-z7-eme" firstAttribute="width" secondItem="Q1L-N9-1va" secondAttribute="width" id="6Vx-Qy-T77"/>
                 <constraint firstAttribute="centerY" secondItem="DZu-IS-eds" secondAttribute="centerY" constant="113" id="JI9-pd-8Fo"/>
-                <constraint firstAttribute="centerY" secondItem="Q1L-N9-1va" secondAttribute="centerY" id="PWX-cy-7bP"/>
-                <constraint firstItem="Q1L-N9-1va" firstAttribute="centerX" secondItem="4ka-z7-eme" secondAttribute="centerX" id="USl-F0-Ypz"/>
+                <constraint firstItem="4ka-z7-eme" firstAttribute="centerX" secondItem="Q1L-N9-1va" secondAttribute="centerX" constant="-0.5" id="Qsy-tV-dGc"/>
+                <constraint firstItem="Q1L-N9-1va" firstAttribute="leading" secondItem="DZu-IS-eds" secondAttribute="leading" id="TnW-gd-Ohh"/>
                 <constraint firstAttribute="centerX" secondItem="DZu-IS-eds" secondAttribute="centerX" id="YYU-gz-0y7"/>
-                <constraint firstItem="DZu-IS-eds" firstAttribute="centerX" secondItem="Q1L-N9-1va" secondAttribute="centerX" id="drr-XT-JxR"/>
-                <constraint firstItem="4ka-z7-eme" firstAttribute="top" secondItem="Q1L-N9-1va" secondAttribute="bottom" constant="53" id="fBN-lG-8iL"/>
-                <constraint firstAttribute="centerX" secondItem="Q1L-N9-1va" secondAttribute="centerX" id="n4I-CU-I8D"/>
+                <constraint firstItem="4ka-z7-eme" firstAttribute="top" secondItem="Q1L-N9-1va" secondAttribute="bottom" constant="60" id="jxR-Xt-Agg"/>
+                <constraint firstItem="Q1L-N9-1va" firstAttribute="trailing" secondItem="DZu-IS-eds" secondAttribute="trailing" id="sNE-Ox-PgP"/>
+                <constraint firstItem="Q1L-N9-1va" firstAttribute="top" secondItem="DZu-IS-eds" secondAttribute="bottom" constant="50" id="vqS-cm-o6D"/>
+                <constraint firstItem="Q1L-N9-1va" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yb5-0n-6xs"/>
             </constraints>
         </view>
     </objects>

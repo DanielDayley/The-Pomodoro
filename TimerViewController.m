@@ -13,6 +13,7 @@
 @interface TimerViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *timerButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 
 @end
 
@@ -30,6 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.timerButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.resetButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated {
@@ -37,7 +44,7 @@
     [[AppearanceController sharedInstance] initializeAppearanceDefaults];
     self.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [AppearanceController sharedInstance].themeColor;
-    self.timerLabel.textColor = [UIColor whiteColor];
+    self.timerLabel.textColor = [UIColor colorWithRed:0.000f green:0.502f blue:1.000f alpha:1.00f];
 }
 - (IBAction)resetButton:(id)sender {
     [Timer sharedInstance].timeRemainingInSeconds = [Timer sharedInstance].previousRoundTime;
